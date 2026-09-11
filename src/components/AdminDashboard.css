@@ -1,0 +1,594 @@
+/* ==========================================================================
+   Admin Dashboard — Dark Glassmorphism
+   Scoped entirely to .admin-dashboard so it never touches existing styles.
+   Reuses the design-system CSS variables already defined in App.css.
+   ========================================================================== */
+
+.admin-dashboard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: adminFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes adminFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Top Bar: Title + Pharmacist Profile                                    */
+/* ---------------------------------------------------------------------- */
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: hsla(var(--bg-slate-800) / 0.25);
+  border: 1px solid hsl(var(--border-color));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+
+.admin-title-block {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.admin-title-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: hsl(var(--primary));
+  background: hsla(var(--primary), 0.12);
+  border: 1px solid hsla(var(--primary), 0.3);
+  box-shadow: 0 0 20px hsla(var(--primary-glow));
+}
+
+.admin-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(var(--text-primary));
+  margin: 0;
+}
+
+.admin-subtitle {
+  font-size: 0.8rem;
+  color: hsl(var(--text-secondary));
+  margin: 0.15rem 0 0;
+}
+
+.pharmacist-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: hsla(var(--bg-slate-800) / 0.35);
+  border: 1px solid hsl(var(--border-color));
+  border-radius: 999px;
+  padding: 0.4rem 1rem 0.4rem 0.4rem;
+  transition: var(--transition-fast);
+}
+
+.pharmacist-profile:hover {
+  border-color: hsla(var(--primary), 0.35);
+  background: hsla(var(--bg-slate-800) / 0.55);
+}
+
+.pharmacist-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--secondary));
+  background: hsla(var(--secondary), 0.15);
+  border: 1px solid hsla(var(--secondary), 0.35);
+}
+
+.pharmacist-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.pharmacist-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: hsl(var(--text-primary));
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pharmacist-verified {
+  color: hsl(var(--primary));
+}
+
+.pharmacist-role {
+  font-size: 0.7rem;
+  color: hsl(var(--text-muted));
+}
+
+.admin-exit-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: hsl(var(--text-secondary));
+  background: hsla(var(--bg-slate-800) / 0.35);
+  border: 1px solid hsl(var(--border-color));
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.admin-exit-btn:hover {
+  color: hsl(var(--text-primary));
+  border-color: hsla(var(--primary), 0.35);
+  transform: translateX(-2px);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Stat Cards                                                              */
+/* ---------------------------------------------------------------------- */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.admin-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: hsla(var(--bg-slate-800) / 0.25);
+  border: 1px solid hsl(var(--border-color));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  transition: var(--transition-fast);
+  animation: adminStagger 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 0.06s);
+}
+
+@keyframes adminStagger {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: hsla(var(--primary), 0.3);
+  box-shadow: 0 10px 30px -12px hsla(var(--primary), 0.25);
+}
+
+.admin-stat-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-stat-icon.total {
+  color: hsl(var(--primary));
+  background: hsla(var(--primary), 0.12);
+}
+
+.admin-stat-icon.healthy {
+  color: hsl(var(--success));
+  background: hsla(var(--success), 0.12);
+}
+
+.admin-stat-icon.low {
+  color: hsl(var(--warning));
+  background: hsla(var(--warning), 0.12);
+}
+
+.admin-stat-icon.out {
+  color: hsl(var(--danger));
+  background: hsla(var(--danger), 0.12);
+}
+
+.admin-stat-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: hsl(var(--text-primary));
+  line-height: 1.1;
+}
+
+.admin-stat-label {
+  font-size: 0.72rem;
+  color: hsl(var(--text-muted));
+  margin-top: 0.15rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Controls: Medicine selector + Search bar                                */
+/* ---------------------------------------------------------------------- */
+.admin-controls-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.admin-med-select {
+  flex: 1 1 260px;
+  background: hsla(var(--bg-slate-800) / 0.4);
+  border: 1px solid hsl(var(--border-color));
+  color: hsl(var(--text-primary));
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.admin-med-select:hover,
+.admin-med-select:focus {
+  border-color: hsla(var(--primary), 0.4);
+  outline: none;
+}
+
+.admin-search-bar {
+  flex: 2 1 340px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  color: hsl(var(--text-muted));
+  pointer-events: none;
+}
+
+.admin-search-bar input {
+  width: 100%;
+  background: hsla(var(--bg-slate-800) / 0.4);
+  border: 1px solid hsl(var(--border-color));
+  color: hsl(var(--text-primary));
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  transition: var(--transition-fast);
+}
+
+.admin-search-bar input:focus {
+  outline: none;
+  border-color: hsla(var(--primary), 0.45);
+  box-shadow: 0 0 0 3px hsla(var(--primary-glow));
+}
+
+.admin-search-bar input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+.admin-managing-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: hsl(var(--text-secondary));
+  margin: -0.6rem 0 0;
+}
+
+.admin-managing-note strong {
+  color: hsl(var(--primary));
+}
+
+/* ---------------------------------------------------------------------- */
+/* Pharmacy Cards Grid                                                     */
+/* ---------------------------------------------------------------------- */
+.admin-pharmacy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.admin-empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: hsl(var(--text-muted));
+  padding: 3rem 1rem;
+  font-size: 0.85rem;
+}
+
+.admin-pharmacy-card {
+  background: hsla(var(--bg-slate-800) / 0.22);
+  border: 1px solid hsl(var(--border-color));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: var(--transition-fast);
+  animation: adminStagger 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 0.04s);
+}
+
+.admin-pharmacy-card:hover {
+  transform: translateY(-4px);
+  border-color: hsla(var(--primary), 0.3);
+  box-shadow: 0 14px 34px -14px hsla(var(--primary), 0.3);
+}
+
+.admin-pharmacy-card.flash-update {
+  border-color: hsla(var(--success), 0.6);
+  box-shadow: 0 0 0 3px hsla(var(--success), 0.18);
+}
+
+.admin-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.admin-card-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--primary));
+  background: hsla(var(--primary), 0.1);
+  border: 1px solid hsla(var(--primary), 0.25);
+}
+
+.admin-card-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.admin-card-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: hsl(var(--text-primary));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-status-pill {
+  align-self: flex-start;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.admin-status-pill.healthy {
+  color: hsl(var(--success));
+  background: hsla(var(--success), 0.12);
+  border: 1px solid hsla(var(--success), 0.3);
+}
+
+.admin-status-pill.low {
+  color: hsl(var(--warning));
+  background: hsla(var(--warning), 0.12);
+  border: 1px solid hsla(var(--warning), 0.3);
+}
+
+.admin-status-pill.out {
+  color: hsl(var(--danger));
+  background: hsla(var(--danger), 0.12);
+  border: 1px solid hsla(var(--danger), 0.3);
+}
+
+.admin-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  color: hsl(var(--text-muted));
+}
+
+.admin-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.admin-stock-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: hsl(var(--text-secondary));
+  border-top: 1px dashed hsl(var(--border-color));
+  padding-top: 0.6rem;
+}
+
+.admin-stock-value {
+  font-weight: 700;
+  color: hsl(var(--text-primary));
+}
+
+.admin-adjust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.admin-btn-round {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.admin-btn-round.plus {
+  color: #ffffff;
+  background: hsl(var(--success));
+  box-shadow: 0 4px 14px -4px hsla(var(--success), 0.6);
+}
+
+.admin-btn-round.plus:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px -4px hsla(var(--success), 0.75);
+}
+
+.admin-btn-round.minus {
+  color: #ffffff;
+  background: hsl(var(--danger));
+  box-shadow: 0 4px 14px -4px hsla(var(--danger), 0.6);
+}
+
+.admin-btn-round.minus:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px -4px hsla(var(--danger), 0.75);
+}
+
+.admin-btn-round:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.admin-btn-round:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.admin-adjust-value {
+  min-width: 2.2rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: hsl(var(--text-primary));
+}
+
+.admin-update-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-update-input {
+  flex: 1;
+  min-width: 0;
+  background: hsla(var(--bg-slate-800) / 0.4);
+  border: 1px solid hsl(var(--border-color));
+  color: hsl(var(--text-primary));
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  transition: var(--transition-fast);
+}
+
+.admin-update-input:focus {
+  outline: none;
+  border-color: hsla(var(--primary), 0.45);
+}
+
+.admin-update-input::-webkit-outer-spin-button,
+.admin-update-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.admin-btn-update {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: hsl(var(--bg-slate-950));
+  background: hsl(var(--primary));
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.admin-btn-update:hover {
+  background: hsl(var(--primary-hover));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -6px hsla(var(--primary-glow));
+}
+
+.admin-btn-update:active {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Responsive Design                                                       */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .admin-dashboard {
+    padding: 1rem 1rem 2.5rem;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-controls-row {
+    flex-direction: column;
+  }
+
+  .admin-pharmacy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 460px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
